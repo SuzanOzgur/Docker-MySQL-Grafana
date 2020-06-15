@@ -21,13 +21,19 @@ add the ports so that MySQL-server is accesible by MySQLWorkbench at localhost:3
 If no other image runs in docker, the IP given to MySQL will be 172.17.0.2
 
 ```bash
-docker run -p 3306:3306 --name some-mysql -v $PWD/volumes/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
+docker run -p 3306:3306 --user $(id -u):$(id -g) --name some-mysql -v $PWD/volumes/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:latest
 ```
 
 ### Grafana
 
 ```bash
-docker run -d -p 3000:3000 --name grafana --user 1000 -v $PWD/volumes/grafana:/var/lib/grafana grafana/grafana:6.5.0
+docker run -d -p 3000:3000 --name grafana --user $(id -u):$(id -g) -v $PWD/volumes/grafana:/var/lib/grafana grafana/grafana:6.5.0
+```
+
+To install plugins run:
+```bash
+docker exec -u $(id -u) -it grafana grafana-cli plugins install grafana-piechart-panel
+docker restart grafana
 ```
 
 To embed iframes run the following:
