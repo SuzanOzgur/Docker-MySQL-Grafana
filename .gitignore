@@ -1,3 +1,4 @@
-/mysql
+volumes/mysql/*
 
-volumes/mysql/
+# Added .gitkeep to keep folder in git and not its contents
+!volumes/mysql/.gitkeep 

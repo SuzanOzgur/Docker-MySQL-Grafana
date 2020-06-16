@@ -4,7 +4,10 @@ Commands to run separate images for MySQL and Grafana with persistent data are p
 
 
 __WARNING:__ the -v flag will create the directories if they don't exist on the host machine.
+
 `$PWD` variable is the directory from which the docker commands are executed.
+
+/volumes/mysql must be created by user before starting mysql docker to avoid permission issues
 
 
 Folder contents:
